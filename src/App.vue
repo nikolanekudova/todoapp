@@ -1,6 +1,6 @@
 <script setup>
-  import MyMenu from "./components/MyMenu.vue"
-  import TodoPage from "./components/TodoPage.vue"
+import MyMenu from './components/MyMenu.vue'
+import TodoPage from './components/TodoPage.vue'
 </script>
 
 <template>
@@ -11,8 +11,8 @@
 </template>
 
 <style scoped>
-  #app-wrapper {
-    display: flex;
-    height: 100vh;
-  }
+#app-wrapper {
+  display: flex;
+  height: 100vh;
+}
 </style>

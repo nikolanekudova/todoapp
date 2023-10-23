@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from 'vue'
 import { Delete16Regular } from '@vicons/fluent'
 
 const props = defineProps({

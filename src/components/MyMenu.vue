@@ -6,11 +6,11 @@
     <div id="overview-wrapper">
       <div class="header-menu-wrapper">Overview</div>
       <div class="items-menu-wrapper">
-        <div class="item-menu-wrapper">
+        <div class="item-menu-wrapper" @click="store.setTodayActivePage">
           <CalendarDay class="menu-icon" />
           <div class="item-menu">Today</div>
         </div>
-        <div class="item-menu-wrapper">
+        <div class="item-menu-wrapper" @click="store.setUpcomingActivePage">
           <CalendarAlt class="menu-icon" />
           <div class="item-menu">Upcoming</div>
         </div>
@@ -21,7 +21,14 @@
         <div class="header-menu-wrapper">Projects</div>
       </div>
       <div class="items-menu-wrapper">
-        <ItemMenu v-for="project in projectList" :key="project.id" :name="project.title" :id="project.id" @deleteProject="deleteProject"/>
+        <ItemMenu
+          v-for="project in projectList"
+          :key="project.id"
+          :name="project.title"
+          :id="project.id"
+          @deleteProject="deleteProject"
+          @click="store.setActivePage(project.title)"
+        />
       </div>
       <div
         class="icon-add-wrapper"
@@ -35,7 +42,7 @@
         <input type="text" id="project-input" v-model="title" />
         <div class="btns-wrapper">
           <button id="btn-add" @click="addProject">add</button>
-        <button id="btn-cancel" @click="cancelAddingProject">cancel</button>
+          <button id="btn-cancel" @click="cancelAddingProject">cancel</button>
         </div>
       </div>
     </div>
@@ -53,7 +60,6 @@ import ItemMenu from './ItemMenu.vue'
 const store = useTodoListStore()
 const { projectList } = storeToRefs(store)
 const title = ref('')
-//const { deleteProject } = store
 
 function addProject() {
   store.addProject(title)
@@ -67,6 +73,8 @@ function cancelAddingProject() {
 function deleteProject(projectId) {
   store.deleteProject(projectId)
 }
+
+
 </script>
 
 <style scoped>
@@ -148,7 +156,8 @@ function deleteProject(projectId) {
   border: none;
 }
 
-#btn-add, #btn-cancel {
+#btn-add,
+#btn-cancel {
   background-color: rgb(219, 90, 186);
   padding: 5px 10px;
   color: rgb(241, 242, 246);
